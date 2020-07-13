@@ -29,4 +29,13 @@ public class StackTest {
         Assert.assertEquals(1, stack.getSize());
         Assert.assertFalse(stack.isEmpty());
     }
+
+    @Test
+    @DisplayName("Push multiple elements to stack")
+    public void pushMultipleElementsToStack() {
+        stack.push(5);
+        stack.push(3);
+        Assert.assertEquals(2, stack.getSize());
+    }
+
 }
