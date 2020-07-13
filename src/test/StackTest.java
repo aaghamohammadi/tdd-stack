@@ -10,5 +10,6 @@ public class StackTest {
     public void emptyStackShouldHaveZeroSize() {
         Stack stack = new Stack();
         Assert.assertTrue(stack.isEmpty());
+        Assert.assertEquals(0, stack.getSize());
     }
 }
