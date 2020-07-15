@@ -20,9 +20,13 @@ public class Stack {
     }
 
     public int pop() {
-        if (stack_.isEmpty()) {
+        validateEmptyStack();
+        return stack_.remove(getSize() - 1);
+    }
+
+    private void validateEmptyStack() {
+        if (isEmpty()) {
             throw new EmptyStackException();
         }
-        return stack_.remove(getSize() - 1);
     }
 }
