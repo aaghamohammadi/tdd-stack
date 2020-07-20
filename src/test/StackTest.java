@@ -1,9 +1,10 @@
 package test;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import stack.Stack;
 
 import java.util.EmptyStackException;
@@ -12,7 +13,7 @@ import java.util.EmptyStackException;
 public class StackTest {
     private Stack stack;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         stack = new Stack();
     }
@@ -20,16 +21,16 @@ public class StackTest {
     @Test
     @DisplayName("Empty stack should have zero size")
     public void emptyStackShouldHaveZeroSize() {
-        Assert.assertTrue(stack.isEmpty());
-        Assert.assertEquals(0, stack.getSize());
+        Assertions.assertTrue(stack.isEmpty());
+        Assertions.assertEquals(0, stack.getSize());
     }
 
     @Test
     @DisplayName("Push one element to stack")
     public void pushOneElementToStack() {
         stack.push(3);
-        Assert.assertEquals(1, stack.getSize());
-        Assert.assertFalse(stack.isEmpty());
+        Assertions.assertEquals(1, stack.getSize());
+        Assertions.assertFalse(stack.isEmpty());
     }
 
     @Test
@@ -37,13 +38,13 @@ public class StackTest {
     public void pushMultipleElementsToStack() {
         stack.push(5);
         stack.push(3);
-        Assert.assertEquals(2, stack.getSize());
+        Assertions.assertEquals(2, stack.getSize());
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     @DisplayName("Pop one element from empty Stack should Throw Exception")
     public void popOneElementFromEmptyStack() {
-        stack.pop();
+        Assertions.assertThrows(EmptyStackException.class, stack::pop);
     }
 
     @Test
@@ -52,22 +53,23 @@ public class StackTest {
         stack.push(3);
         stack.push(5);
         stack.push(1);
-        Assert.assertEquals(1, stack.pop());
-        Assert.assertEquals(2, stack.getSize());
-        Assert.assertFalse(stack.isEmpty());
+        Assertions.assertEquals(1, stack.pop());
+        Assertions.assertEquals(2, stack.getSize());
+        Assertions.assertFalse(stack.isEmpty());
 
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     @DisplayName("Push multiple elements and pop multiple elements from stack when the number of pops is greater than that of pushes")
     public void pushMultipleElementAndPopMultipleElementsFromStackWhenTheNumberOfPopsIsGreaterThanThatOfPushes() {
         stack.push(4);
         stack.push(1);
         stack.pop();
         stack.pop();
-        Assert.assertEquals(0, stack.getSize());
-        Assert.assertTrue(stack.isEmpty());
-        stack.pop();
+        Assertions.assertEquals(0, stack.getSize());
+        Assertions.assertTrue(stack.isEmpty());
+        Assertions.assertThrows(EmptyStackException.class, stack::pop);
+
     }
 
 
